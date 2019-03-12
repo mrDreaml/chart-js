@@ -2,10 +2,13 @@ function ChartJS(containerID, inputData) {
   const canvas = document.getElementById(containerID);
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
+  const chartRows = 5;
+  const chartColumns = 6;
+  const xAxisPadding = 30;
+  const yAxisPadding = 30;
 
 
-  const getStep = (columns) => {
-    const xMaxValue = Math.max(...columns.x);
+  const getChartParameters = (columns) => {
     const yMaxValue = (() => {
       this.yMaxValue = undefined;
       Object.defineProperty(columns, 'x', {
@@ -14,7 +17,7 @@ function ChartJS(containerID, inputData) {
 
       Object.values(columns).forEach((column) => {
         const max = Math.max(...column);
-        if (yMaxValue === undefined || yMaxValue < max) {
+        if (this.yMaxValue === undefined || this.yMaxValue < max) {
           this.yMaxValue = max;
         }
       });
@@ -25,30 +28,39 @@ function ChartJS(containerID, inputData) {
       return this.yMaxValue;
     })();
 
-
-    const xStep = canvas.clientWidth / (columns.x.length - 1);
-    const yStep = canvas.clientHeight / yMaxValue;
-    const xAxisStep = Math.floor(xMaxValue / 6);
-    const yAxisStep = Math.floor(yMaxValue / 5);
+    const xStep = (canvas.clientWidth - yAxisPadding * 2) / columns.x.length;
+    const yStep = (canvas.clientHeight - xAxisPadding * 2) / yMaxValue;
+    const xAxisScale = Math.floor(columns.x.length / chartColumns);
+    const yAxisScale = Math.floor(yMaxValue / chartRows);
 
     return {
-      x: xStep,
-      y: yStep,
-      xAxis: xAxisStep,
-      yAxis: yAxisStep,
+      xStep,
+      yStep,
+      xAxisScale,
+      yAxisScale,
     };
   };
 
   const drawChart = (chartData) => {
     const { columns } = chartData;
-    const step = getStep(columns);
-    console.log(step.x, step.y);
+    const {
+      xStep, yStep, xAxisScale, yAxisScale,
+    } = getChartParameters(columns);
+    console.log(columns);
 
     const ctx = canvas.getContext('2d');
     columns.x.forEach((xValue, xIndex) => {
       ctx.beginPath();
-      ctx.arc(3 + xIndex * step.x, canvas.height - 3 - columns.y0[xIndex] * step.y, 2, 0, 2 * Math.PI);
+      ctx.arc(3 + xIndex * xStep + yAxisPadding, canvas.height - columns.y0[xIndex] * yStep - xAxisPadding, 2, 0, 2 * Math.PI);
       ctx.stroke();
+    });
+
+    Array(chartColumns).fill().forEach((e, i) => {
+      ctx.beginPath();
+      const xPointValue = i * xAxisScale;
+      const widthBetweenPoints = xStep * xAxisScale;
+      ctx.strokeStyle = '#FF0000';
+      ctx.strokeText(columns.x[xPointValue], widthBetweenPoints * (i + 0.5) + 3, canvas.height - 1);
     });
   };
 
