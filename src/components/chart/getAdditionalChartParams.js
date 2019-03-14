@@ -1,25 +1,25 @@
 export default function getAdditionalChartParams(columns) {
   const yMaxValue = (() => {
-    this.yMaxValue = undefined;
+    let yMaxValueS;
     Object.defineProperty(columns, 'x', {
       enumerable: false,
     });
 
     Object.values(columns).forEach((column) => {
       const max = Math.max(...column);
-      if (this.yMaxValue === undefined || this.yMaxValue < max) {
-        this.yMaxValue = max;
+      if (yMaxValueS === undefined || yMaxValueS < max) {
+        yMaxValueS = max;
       }
     });
 
     Object.defineProperty(columns, 'x', {
       enumerable: true,
     });
-    return this.yMaxValue;
+    return yMaxValueS;
   })();
 
-  const xStep = (this.containerWidth) / columns.x.length;
-  const yStep = (this.containerHeight) / yMaxValue;
+  const xStep = (this.width) / columns.x.length;
+  const yStep = (this.height) / yMaxValue;
   const xAxisScale = Math.floor(columns.x.length / this.chartColumns);
   const yAxisScale = Math.floor(yMaxValue / this.chartRows);
 
