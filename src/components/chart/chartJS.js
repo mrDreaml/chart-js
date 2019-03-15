@@ -56,11 +56,56 @@ class ChartJS extends Component {
   showNotification(e) {
     const posChartX = e.pageX - this.containerOffsetLeft;
     const posChartY = e.pageY;
-    // console.log(posChartX, posChartY);
+    const { columns, colors } = this.props.inputData; // eslint-disable-line
+    const { xStep, yStep, height } = this.chartParams;
+    const columnIndex = Math.round(posChartX / xStep);
+
+    const noteText = [];
+    const dotMarks = [];
+    Object.entries(columns).forEach((col) => {
+      const key = col[0];
+      const value = col[1];
+      if (key === 'x') {
+        noteText.push({
+          type: 'caption',
+          value: value[columnIndex],
+          color: '#000000',
+        });
+      } else {
+        const color = colors[key];
+
+        dotMarks.push({
+          x: xStep * columnIndex,
+          y: height - yStep * value[columnIndex],
+          color,
+        });
+
+        noteText.push({
+          type: 'infoText',
+          value: value[columnIndex],
+          color,
+        });
+      }
+    });
+    const markLine = {
+      x: xStep * columnIndex,
+      height,
+      style: {
+        stroke: '#EEEEEE',
+        strokeWidth: 1,
+      },
+    };
+
     this.setState({
       notification: {
         isShow: true,
-        pos: [posChartX, posChartY],
+        mousePosition: {
+          x: columnIndex * xStep,
+          y: posChartY,
+        },
+        noteText,
+        dotMarks,
+        markLine,
       },
     });
   }
@@ -74,11 +119,12 @@ class ChartJS extends Component {
   }
 
   render() {
-    const { columns } = this.props.inputData; // eslint-disable-line
+    const { columns, colors } = this.props.inputData; // eslint-disable-line
     const { notification, isSvgDidMout } = this.state;
+    const { chartSVGProps } = this.props;
 
     const chartBgStyle = {
-      fill: '#EEEEEE',
+      fill: '#FFFFFF',
     };
     const chartLineStyle = {
       stroke: '#FF0000',
@@ -99,8 +145,6 @@ class ChartJS extends Component {
       },
     };
 
-    const { chartSVGProps } = this.props;
-
     return (
       <svg {...chartSVGProps} onMouseMove={this.showNotification.bind(this)} onMouseLeave={this.removeNotification.bind(this)}>
         { isSvgDidMout
@@ -109,9 +153,19 @@ class ChartJS extends Component {
               <rect width={this.chartParams.width} height={this.chartParams.height} style={chartBgStyle} />
               <ChartAxisX chartParams={this.chartParams} chartColumnValues={columns.x} styles={chartAxisStyle.textStyle} />
               <ChartAxisY chartParams={this.chartParams} styles={chartAxisStyle} />
-              <Chart chartParams={this.chartParams} chartColumnValues={columns.y0} styles={chartLineStyle} />
-              <Chart chartParams={this.chartParams} chartColumnValues={columns.y1} styles={chartLineStyle2} />
-              {notification.isShow ? <Notification /> : null }
+              {Object.entries(columns).map((col) => {
+                const colName = col[0];
+                const colValue = col[1];
+                if (colName !== 'x') {
+                  const styles = {
+                    stroke: colors[colName],
+                    strokeWidth: '2',
+                  };
+                  return <Chart chartParams={this.chartParams} chartColumnValues={colValue} styles={styles} />;
+                }
+                return null;
+              })}
+              {notification.isShow ? <Notification {...notification} /> : null}
             </React.Fragment>
           )
           : null }
@@ -123,4 +177,6 @@ class ChartJS extends Component {
 
 export default ChartJS;
 
-// svg => shold be there
+
+// fix y axis value
+// REFACTORING MOTHERFUCKER !!!

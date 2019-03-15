@@ -17,7 +17,7 @@ class App extends Component {
       id: 'chartJS-container', height: '500px', width: '100%', position: 'relative',
     };
     return (
-      <ChartJS inputData={chartInputData[0]} chartSVGProps={chartSVGProps} />
+      <ChartJS inputData={chartInputData[1]} chartSVGProps={chartSVGProps} />
     );
   }
 }
