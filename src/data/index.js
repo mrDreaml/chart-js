@@ -1,5 +1,6 @@
-import inputData from './chartInputData';
+import inputData from './inputData';
 
+// preparing input data =>
 
 inputData.forEach((charts) => {
   const newColumns = {};
@@ -8,5 +9,6 @@ inputData.forEach((charts) => {
   });
   charts.columns = newColumns; // eslint-disable-line
 });
+
 
 export default inputData;

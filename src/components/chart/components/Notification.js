@@ -21,16 +21,17 @@ function InfoBlock(props) {
 
   return (
     <React.Fragment>
-      <rect x={xStart} y={yStart} width={width} height={height} style={{ fill: '#EEEEEE' }} />
+      <rect className="notification-background" x={xStart} y={yStart} width={width} height={height} />
       {noteText.map((t, i) => {
         const textStyle = {
           fill: t.color,
         };
+        let classNameCaptopn = '';
         if (t.type === 'caption') {
-          textStyle.fontWeight = 'bold';
+          classNameCaptopn += '-caption';
         }
         const key = t.value + i * lineHeight;
-        return <text key={key} x={xTextPos} y={yTextPos + i * lineHeight} style={textStyle}>{t.value}</text>;
+        return <text className={`notification-text${classNameCaptopn}`} key={key} x={xTextPos} y={yTextPos + i * lineHeight} style={textStyle}>{t.value}</text>;
       })}
     </React.Fragment>
   );
@@ -42,13 +43,13 @@ const Marker = (props) => {
     const { x, y, color } = dotMark;
     const radius = 4;
     const strokeWidth = 2;
-    return <circle cx={x} cy={y} r={radius} stroke={color} strokeWidth={strokeWidth} fill="#FFFFFF" />;
+    return <circle className="notification-marker" cx={x} cy={y} r={radius} stroke={color} strokeWidth={strokeWidth} />;
   });
 };
 
 const MarkLine = (props) => {
-  const { x, height, style } = props;
-  return <line x1={x} y1={0} x2={x} y2={height} style={style} />;
+  const { x, chartHeight } = props;
+  return <line className="notification-markline" x1={x} y1={0} x2={x} y2={chartHeight} />;
 };
 
 function Notification(props) {

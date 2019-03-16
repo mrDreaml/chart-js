@@ -2,10 +2,10 @@ import React from 'react';
 
 export default (props) => {
   const {
-    chartParams, chartColumnValues, styles,
+    chartParams, chartColumnValues,
   } = props;
   const {
-    chartColumns, xAxisScale, xStep, height,
+    chartColumns, xAxisScale, xStep, containerHeight,
   } = chartParams;
   return Array(chartColumns).fill().map((e, i) => {
     const xPointValue = i * xAxisScale;
@@ -19,6 +19,6 @@ export default (props) => {
       dateValueS = dateValueS.join(' ');
       return dateValueS;
     })();
-    return <text key={dateValue} x={marginBetweenPoints * (i + 0.5)} y={height} {...styles}>{dateValue}</text>;
+    return <text className="axis-x-values axis-values" key={dateValue} x={marginBetweenPoints * (i + 0.5)} y={containerHeight}>{dateValue}</text>;
   });
 };

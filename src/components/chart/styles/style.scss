@@ -1,0 +1,48 @@
+$textFontFamily: "Segoe UI",Arial, sans-serif;
+$light-theme--bgFill: #fff;
+$light-theme--bordersColor: #eee;
+$light-theme--AxisTextColor: #ccc;
+
+.ChartJS {
+    .chart-background {
+        fill: $light-theme--bgFill;
+    }
+
+    .chartLine {
+        stroke-width: 3;
+    }
+
+    .axis-values {
+        fill: $light-theme--AxisTextColor;
+        font-family: $textFontFamily;
+    }
+
+    .axis-y-line {
+        stroke-width: 1;
+        stroke: $light-theme--bordersColor;
+    }
+
+    .notification-background{
+        fill: $light-theme--bgFill;
+        stroke: $light-theme--bordersColor;
+        rx: 5px;
+    }
+
+    .notification-marker {
+        fill: $light-theme--bgFill;
+    }
+
+    .notification-markline {
+        stroke-width: 1;
+        stroke: $light-theme--bordersColor;
+    }
+
+    .notification-text, .notification-text-caption {
+        font-family: $textFontFamily;
+        font-weight: 500;
+    }
+
+    .notification-text {
+        font-weight: bold;
+    }
+}

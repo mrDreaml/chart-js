@@ -18,8 +18,8 @@ export default function getAdditionalChartParams(columns) {
     return yMaxValueS;
   })();
 
-  const xStep = (this.width) / columns.x.length;
-  const yStep = (this.height) / yMaxValue;
+  const xStep = (this.chartWidth) / columns.x.length;
+  const yStep = (this.chartHeight) / yMaxValue;
   const xAxisScale = Math.floor(columns.x.length / this.chartColumns);
   const yAxisScale = Math.floor(yMaxValue / this.chartRows);
 

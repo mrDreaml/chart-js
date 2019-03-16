@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import ChartJS from './chart/chartJS';
-import chartInputData from '../data/index';
-
+import ChartJS from './chart/Index';
+import inputData from '../data/index';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
 
   }
@@ -16,8 +11,10 @@ class App extends Component {
     const chartSVGProps = {
       id: 'chartJS-container', height: '500px', width: '100%', position: 'relative',
     };
+
+
     return (
-      <ChartJS inputData={chartInputData[1]} chartSVGProps={chartSVGProps} />
+      <ChartJS inputData={inputData[1]} chartSVGProps={chartSVGProps} />
     );
   }
 }
