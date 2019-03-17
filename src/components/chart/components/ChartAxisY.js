@@ -13,10 +13,10 @@ export default (props) => {
     const xStartPosition = 0;
     const xEndPosition = chartWidth;
     const yPosition = chartHeight - marginBetweenPoints * (i);
-    const key = yPointValue * marginBetweenPoints;
+    const key = yPointValue * marginBetweenPoints + i;
     const lineTopMargin = 10;
     return (
-      <React.Fragment>
+      <React.Fragment key={`${key}fragment`}>
         <text className="axis-y-values axis-values" key={`${key}axisY`} x={xStartPosition} y={yPosition - lineTopMargin}>{yPointValue}</text>
         <line className="axis-y-line" key={`${key}line`} x1={xStartPosition} y1={yPosition} x2={xEndPosition} y2={yPosition} />
       </React.Fragment>

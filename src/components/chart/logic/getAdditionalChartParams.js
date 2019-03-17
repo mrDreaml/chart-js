@@ -20,13 +20,17 @@ export default function getAdditionalChartParams(columns) {
 
   const xStep = (this.chartWidth) / (columns.x.length - 1);
   const yStep = (this.chartHeight) / yMaxValue;
-  const xAxisScale = (columns.x.length - 1) / this.chartColumns;
-  const yAxisScale = yMaxValue / this.chartRows;
-
+  if (this.chartColumns && this.chartRows) {
+    const xAxisScale = (columns.x.length - 1) / this.chartColumns;
+    const yAxisScale = yMaxValue / this.chartRows;
+    return {
+      xStep,
+      yStep,
+      xAxisScale,
+      yAxisScale,
+    };
+  }
   return {
-    xStep,
-    yStep,
-    xAxisScale,
-    yAxisScale,
+    xStep, yStep,
   };
 }

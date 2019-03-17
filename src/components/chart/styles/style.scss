@@ -46,3 +46,16 @@ $light-theme--AxisTextColor: #ccc;
         font-weight: bold;
     }
 }
+
+.ChartJS-map {
+    .chart-background-map {
+        fill: $light-theme--bgFill;
+    }
+
+    .not-selected-bg-map{
+        fill: rgba(220,220,230,.5);
+    }
+    .focus-move-element {
+        fill: rgba(120,120,130,.5);
+    }
+}

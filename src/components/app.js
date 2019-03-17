@@ -9,12 +9,15 @@ class App extends Component {
 
   render() {
     const chartSVGProps = {
-      id: 'chartJS-container', height: '500px', width: '100%', position: 'relative',
+      id: 'chartJS-container', className: 'ChartJS', height: '500px', width: '100%', position: 'relative',
+    };
+    const chartSVGMapProps = {
+      id: 'chartJS-container-map', className: 'ChartJS-map', height: '100px', width: '100%', position: 'relative',
     };
 
 
     return (
-      <ChartJS inputData={inputData[1]} chartSVGProps={chartSVGProps} />
+      <ChartJS inputData={inputData[1]} chartSVGProps={chartSVGProps} chartSVGMapProps={chartSVGMapProps} />
     );
   }
 }

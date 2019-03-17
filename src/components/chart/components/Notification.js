@@ -43,7 +43,8 @@ const Marker = (props) => {
     const { x, y, color } = dotMark;
     const radius = 4;
     const strokeWidth = 2;
-    return <circle className="notification-marker" cx={x} cy={y} r={radius} stroke={color} strokeWidth={strokeWidth} />;
+    const key = `${x * y * radius}notification-marker`;
+    return <circle key={key} className="notification-marker" cx={x} cy={y} r={radius} stroke={color} strokeWidth={strokeWidth} />;
   });
 };
 

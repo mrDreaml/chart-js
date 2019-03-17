@@ -20,6 +20,6 @@ export default (props) => {
       dateValueS = dateValueS.join(' ');
       return dateValueS;
     })();
-    return <text className="axis-x-values axis-values" key={dateValue} x={marginBetweenPoints * (i)} y={containerHeight}>{dateValue}</text>;
+    return <text className="axis-x-values axis-values" key={dateValue + i} x={marginBetweenPoints * (i)} y={containerHeight}>{dateValue}</text>;
   });
 };
