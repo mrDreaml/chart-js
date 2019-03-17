@@ -8,7 +8,8 @@ export default (props) => {
     chartColumns, xAxisScale, xStep, containerHeight,
   } = chartParams;
   return Array(chartColumns).fill().map((e, i) => {
-    const xPointValue = i * xAxisScale;
+    i += 0.5; // values to center not to start
+    const xPointValue = Math.round(i * xAxisScale);
     const marginBetweenPoints = xStep * xAxisScale;
     const dateValue = (() => {
       let dateValueS;
@@ -19,6 +20,6 @@ export default (props) => {
       dateValueS = dateValueS.join(' ');
       return dateValueS;
     })();
-    return <text className="axis-x-values axis-values" key={dateValue} x={marginBetweenPoints * (i + 0.5)} y={containerHeight}>{dateValue}</text>;
+    return <text className="axis-x-values axis-values" key={dateValue} x={marginBetweenPoints * (i)} y={containerHeight}>{dateValue}</text>;
   });
 };

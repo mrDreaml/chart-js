@@ -1,13 +1,14 @@
 export default function getNotificationRenderData(e) {
   const posChartX = e.pageX - this.containerOffsetLeft;
   const posChartY = e.pageY;
-    const { columns, colors } = this.props.inputData; // eslint-disable-line
+  const { colors } = this.props.inputData; // eslint-disable-line
   const { xStep, yStep, chartHeight } = this.chartParams;
   const columnIndex = Math.round(posChartX / xStep);
+  const { currentColumnValues } = this.state;
 
   const noteText = [];
   const dotMarks = [];
-  Object.entries(columns).forEach((col) => {
+  Object.entries(currentColumnValues).forEach((col) => {
     const key = col[0];
     const value = col[1];
     if (key === 'x') {

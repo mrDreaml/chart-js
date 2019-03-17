@@ -5,6 +5,7 @@ import ChartAxisX from './components/ChartAxisX';
 import ChartAxisY from './components/ChartAxisY';
 import Notification from './components/Notification';
 import getNotificationRenderData from './logic/getNotificationRenderData';
+import cutColumnValue from './logic/cutColumnValues';
 
 import './styles/style.scss';
 
@@ -46,11 +47,16 @@ class ChartJS extends Component {
       chartColumns: 6,
     };
 
+    const defaultRange = [0, 10];
     const { columns } = this.props.inputData; // eslint-disable-line
-    Object.assign(this.chartParams, getAdditionalChartParams.call(this.chartParams, columns));
+    const currentColumnValues = cutColumnValue(columns, defaultRange);
+    Object.assign(this.chartParams, getAdditionalChartParams.call(this.chartParams, currentColumnValues));
     this.setState({
       isSvgDidMout: true,
+      currentColumnValues,
     });
+
+
   }
 
   componentWillUnmount() {
@@ -77,8 +83,8 @@ class ChartJS extends Component {
   }
 
   render() {
-    const { columns, colors } = this.props.inputData; // eslint-disable-line
-    const { notification, isSvgDidMout } = this.state;
+    const { colors } = this.props.inputData; // eslint-disable-line
+    const { notification, isSvgDidMout, currentColumnValues } = this.state;
     const { chartSVGProps } = this.props; // eslint-disable-line
 
     return (
@@ -87,9 +93,9 @@ class ChartJS extends Component {
           ? (
             <React.Fragment>
               <rect className="chart-background" width={this.chartParams.containerWidth} height={this.chartParams.containerHeight} />
-              <ChartAxisX chartParams={this.chartParams} chartColumnValues={columns.x} />
+              <ChartAxisX chartParams={this.chartParams} chartColumnValues={currentColumnValues.x} />
               <ChartAxisY chartParams={this.chartParams} />
-              {Object.entries(columns).map((col) => {
+              {Object.entries(currentColumnValues).map((col) => {
                 const colName = col[0];
                 const colValue = col[1];
                 if (colName !== 'x') {

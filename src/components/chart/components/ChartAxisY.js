@@ -8,7 +8,7 @@ export default (props) => {
     chartRows, yAxisScale, yStep, chartWidth, chartHeight,
   } = chartParams;
   return Array(chartRows).fill().map((e, i) => {
-    const yPointValue = i * yAxisScale;
+    const yPointValue = Math.round(i * yAxisScale);
     const marginBetweenPoints = yStep * yAxisScale;
     const xStartPosition = 0;
     const xEndPosition = chartWidth;

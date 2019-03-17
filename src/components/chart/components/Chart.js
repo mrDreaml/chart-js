@@ -12,6 +12,6 @@ export default (props) => {
     const y2Coordinate = chartHeight - chartColumnValues[i] * yStep;
     const key = `${x1Coordinate + x2Coordinate + y1Coordinate + y2Coordinate}chart`;
     return i !== 0
-      ? (<line className="chartLine" key={key} x1={x1Coordinate} y1={y1Coordinate} x2={x2Coordinate} y2={y2Coordinate} {...styles} />) : null;
+      ? (<line className={`chartLine ${i}`} key={key} x1={x1Coordinate} y1={y1Coordinate} x2={x2Coordinate} y2={y2Coordinate} {...styles} />) : null;
   });
 };
