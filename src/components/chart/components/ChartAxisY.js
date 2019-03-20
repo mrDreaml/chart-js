@@ -7,12 +7,22 @@ export default (props) => {
   const {
     chartRows, yAxisScale, yStep, chartWidth, chartHeight,
   } = chartParams;
+
+  let { chartLeft, chartTop } = chartParams;
+
+  if (chartLeft === undefined) {
+    chartLeft = 0;
+  }
+  if (chartTop === undefined) {
+    chartTop = 0;
+  }
+
   return Array(chartRows).fill().map((e, i) => {
     const yPointValue = Math.round(i * yAxisScale);
     const marginBetweenPoints = yStep * yAxisScale;
-    const xStartPosition = 0;
-    const xEndPosition = chartWidth;
-    const yPosition = chartHeight - marginBetweenPoints * (i);
+    const xStartPosition = chartLeft;
+    const xEndPosition = chartLeft + chartWidth;
+    const yPosition = chartTop + chartHeight - marginBetweenPoints * (i);
     const key = yPointValue * marginBetweenPoints + i;
     const lineTopMargin = 10;
     return (

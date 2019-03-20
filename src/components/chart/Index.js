@@ -40,11 +40,14 @@ class ChartJS extends Component {
 
     this.defaultRange = [0, 90];
     const xAxisHeight = 30;
+    const chartMargin = 10;
     const chartParams = {
       containerHeight: this.containerHeight,
       containerWidth: this.containerWidth,
-      chartHeight: this.containerHeight - xAxisHeight,
-      chartWidth: this.containerWidth,
+      chartHeight: this.containerHeight - xAxisHeight - chartMargin * 2,
+      chartWidth: this.containerWidth - chartMargin * 2,
+      chartLeft: chartMargin / 2,
+      chartTop: chartMargin / 2,
       xAxisHeight,
       chartRows: 5,
       chartColumns: 6,
@@ -172,3 +175,16 @@ class ChartJS extends Component {
 
 
 export default ChartJS;
+
+
+// finish map slicer scroll element
+
+// refactor
+
+// set margins at chart 
+
+// map marker fixed to bg
+
+// on/off chart columns
+
+// styling, night theme

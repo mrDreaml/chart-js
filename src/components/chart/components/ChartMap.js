@@ -58,24 +58,52 @@ class CharMap extends Component {
     const posMapX = e.clientX - this.containerOffsetLeft;
     const { xStep } = this.chartParamsMap;
     const columnIndex = Math.round(posMapX / xStep);
-    const { range } = this.state;
-    const rangeAfter = Object.values(Object.assign({}, range)); // just a copy
-    rangeAfter[this.mapDragElement] = columnIndex;
+    const { range: rangeBefore } = this.state;
+    const rangeAfter = Object.values(Object.assign({}, rangeBefore));
+    if (this.mapDragElement.type === 'single') {
+      rangeAfter[this.mapDragElement.value] = columnIndex;
+    } else {
+      const selectedWidth = rangeBefore[1] - rangeBefore[0];
+      rangeAfter[0] = columnIndex - this.mapDragElement.selectedMouseMargin;
+      rangeAfter[1] = columnIndex + selectedWidth - this.mapDragElement.selectedMouseMargin;
+    }
+    const { inputData } = this.props;
+    const itemsQuantity = inputData.columns.x.length;
     if (rangeAfter[1] - rangeAfter[0] > 1) {
+      if (rangeAfter[0] < 0) {
+        rangeAfter[0] = 0;
+        rangeAfter[1] = rangeBefore[1];
+      }
+      if (rangeAfter[1] > itemsQuantity - 1) {
+        rangeAfter[1] = itemsQuantity - 1;
+        rangeAfter[0] = rangeBefore[0];
+      }
+      this.props.chartTransformAnimation(rangeAfter); // eslint-disable-line
       this.setState({
         range: rangeAfter,
       });
-        this.props.chartTransformAnimation(rangeAfter); // eslint-disable-line
     }
   }
 
   rangeDragEvent(e, checkedDragElement) {
     if (checkedDragElement !== undefined) {
-      console.log('Starting Drag, element: ');
+      if (checkedDragElement instanceof Array) {
+        this.mapDragElement = {
+          type: 'scroll',
+        };
+        const posMapX = e.clientX - this.containerOffsetLeft;
+        const { xStep } = this.chartParamsMap;
+        const columnIndex = Math.round(posMapX / xStep);
+        const { range: rangeBefore } = this.state;
+        this.mapDragElement.selectedMouseMargin = columnIndex - rangeBefore[0];
+      } else {
+        this.mapDragElement = {
+          type: 'single',
+          value: checkedDragElement,
+        };
+      }
       this.chartContainerMap.addEventListener('mousemove', this.dragAnimation, false);
-      this.mapDragElement = checkedDragElement;
     } else if (this.mapDragElement !== null) {
-      console.log('Up');
       this.chartContainerMap.removeEventListener('mousemove', this.dragAnimation, false);
       this.mapDragElement = null;
     }

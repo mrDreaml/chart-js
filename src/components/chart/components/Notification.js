@@ -39,18 +39,18 @@ function InfoBlock(props) {
 
 const Marker = (props) => {
   const { dotMarks } = props;
-  return dotMarks.map((dotMark) => {
+  return dotMarks.map((dotMark, i) => {
     const { x, y, color } = dotMark;
     const radius = 4;
     const strokeWidth = 2;
-    const key = `${x * y * radius}notification-marker`;
+    const key = `${x * y * radius + i}notification-marker`;
     return <circle key={key} className="notification-marker" cx={x} cy={y} r={radius} stroke={color} strokeWidth={strokeWidth} />;
   });
 };
 
 const MarkLine = (props) => {
-  const { x, chartHeight } = props;
-  return <line className="notification-markline" x1={x} y1={0} x2={x} y2={chartHeight} />;
+  const { x, y, chartHeight } = props;
+  return <line className="notification-markline" x1={x} y1={y} x2={x} y2={y + chartHeight} />;
 };
 
 function Notification(props) {
