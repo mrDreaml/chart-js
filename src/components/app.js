@@ -17,7 +17,7 @@ class App extends Component {
 
 
     return (
-      <ChartJS inputData={inputData[1]} chartSVGProps={chartSVGProps} chartSVGMapProps={chartSVGMapProps} />
+      <ChartJS inputData={inputData[4]} chartSVGProps={chartSVGProps} chartSVGMapProps={chartSVGMapProps} />
     );
   }
 }

@@ -1,65 +1,116 @@
-$textFontFamily: "Segoe UI",Arial, sans-serif;
+$textFontFamily: "Segoe UI", Arial, sans-serif;
 $light-theme--bgFill: #fff;
+$light-theme--bgFill2: #eee;
 $light-theme--bordersColor: #eee;
 $light-theme--AxisTextColor: #ccc;
-
+$light-theme-buttonTextColor: #222;
+$light-theme-buttonTextColor2: #777;
 .ChartJS {
-    .chart-background {
-        fill: $light-theme--bgFill;
-    }
+  .chart-background {
+    fill: $light-theme--bgFill;
+  }
 
-    .chartLine {
-        stroke-width: 3;
-    }
+  .chartLine {
+    stroke-width: 3;
+  }
 
-    .axis-values {
-        fill: $light-theme--AxisTextColor;
-        font-family: $textFontFamily;
-        user-select: none;
-    }
+  .axis-values {
+    fill: $light-theme--AxisTextColor;
+    font-family: $textFontFamily;
+    user-select: none;
+  }
 
-    .axis-y-line {
-        stroke-width: 1;
-        stroke: $light-theme--bordersColor;
-    }
+  .axis-y-line {
+    stroke-width: 1;
+    stroke: $light-theme--bordersColor;
+  }
 
-    .notification-background{
-        fill: $light-theme--bgFill;
-        stroke: $light-theme--bordersColor;
-        rx: 5px;
-    }
+  .notification-background {
+    fill: $light-theme--bgFill;
+    stroke: $light-theme--bordersColor;
+    rx: 5px;
+  }
 
-    .notification-marker {
-        fill: $light-theme--bgFill;
-    }
+  .notification-marker {
+    fill: $light-theme--bgFill;
+  }
 
-    .notification-markline {
-        stroke-width: 1;
-        stroke: $light-theme--bordersColor;
-    }
+  .notification-markline {
+    stroke-width: 1;
+    stroke: $light-theme--bordersColor;
+  }
 
-    .notification-text, .notification-text-caption {
-        font-family: $textFontFamily;
-        font-weight: 500;
-    }
+  .notification-text,
+  .notification-text-caption {
+    font-family: $textFontFamily;
+    font-weight: 500;
+  }
 
-    .notification-text {
-        font-weight: bold;
-    }
+  .notification-text {
+    font-weight: bold;
+  }
 }
 
 .ChartJS-map {
-    .chart-background-map {
-        fill: $light-theme--bgFill;
-    }
+  .chart-background-map {
+    fill: $light-theme--bgFill;
+  }
 
-    .not-selected-bg-map{
-        fill: rgba(220,220,230,.5);
+  .not-selected-bg-map {
+    fill: rgba(220, 220, 230, 0.5);
+  }
+  .focus-move-element {
+    fill: rgba(120, 120, 130, 0.3);
+  }
+  .focus-move-element-scroll {
+    fill: transparent;
+  }
+}
+
+button.chart-select-button {
+  margin: 10px;
+  padding: 0px 15px;
+  background: $light-theme--bgFill2;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+
+  &:hover {
+    span {
+      transition: 0.3s;
+      color: $light-theme-buttonTextColor2;
     }
-    .focus-move-element {
-        fill: rgba(120,120,130,.5);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .chart--circle-color {
+    margin: auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+
+  .chart--circle-color-non-select {
+    display: flex;
+
+    &::after {
+        content: '';
+        margin: auto;
+        background: #eee;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
     }
-    .focus-move-element-scroll {
-        fill: transparent;
-    }
+}
+
+  span {
+    margin-left: 10px;
+    font-family: $textFontFamily;
+    font-size: 2em;
+    font-weight: 600;
+    color: $light-theme-buttonTextColor;
+  }
 }
