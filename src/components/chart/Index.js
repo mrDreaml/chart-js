@@ -17,12 +17,19 @@ import './styles/style.scss';
 class ChartJS extends Component {
   constructor(props) {
     super(props);
+    const { theme } = this.props;
     this.state = {
       notification: {
         isShow: false,
       },
       isSvgDidMout: false,
+      theme,
     };
+
+    this.chartSVGMapClassName = props.chartSVGMapProps.className;
+    this.chartSVGClassName = props.chartSVGProps.className;
+    delete props.chartSVGMapProps.className;
+    delete props.chartSVGProps.className;
 
     this.updateDimensions = this.updateDimensions.bind(this);
     this.showNotification = this.showNotification.bind(this);
@@ -30,6 +37,7 @@ class ChartJS extends Component {
     this.chartChangeRange = this.chartChangeRange.bind(this);
     this.chartSelect = this.chartSelect.bind(this);
   }
+
 
   componentDidMount() {
     const { inputData } = this.props;
@@ -78,6 +86,14 @@ class ChartJS extends Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    const { theme } = props;
+    delete props.chartSVGMapProps.className;
+    delete props.chartSVGProps.className;
+    this.setState({
+      theme,
+    });
+  }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateDimensions);
@@ -141,13 +157,16 @@ class ChartJS extends Component {
       currentColumnValues,
       chartParams,
       chartColumnsShow,
+      theme,
     } = this.state;
     const { chartSVGProps, chartSVGMapProps } = this.props;
+
 
     return (
       <Fragment>
         <svg
           {...chartSVGProps}
+          className={`${this.chartSVGClassName}--${theme}`}
           onMouseMove={this.showNotification}
           onMouseLeave={this.removeNotification}
         >
@@ -197,10 +216,11 @@ class ChartJS extends Component {
             <ChartMap
               range={this.Range}
               chartSVGMapProps={chartSVGMapProps}
+              className={`${this.chartSVGMapClassName}--${theme}`}
               inputData={inputData}
               chartTransformAnimation={this.chartChangeRange}
             />
-            <ChartSelector inputData={inputData} chartSelect={chartColumnsShow} callback={this.chartSelect} />
+            <ChartSelector inputData={inputData} chartSelect={chartColumnsShow} theme={theme} callback={this.chartSelect} />
           </Fragment>
         ) : null}
       </Fragment>

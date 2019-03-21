@@ -3,9 +3,21 @@ $light-theme--bgFill: #fff;
 $light-theme--bgFill2: #eee;
 $light-theme--bordersColor: #eee;
 $light-theme--AxisTextColor: #ccc;
+$light-theme--focus: rgba(220, 220, 230, 0.5);
+$light-theme--focus-moce-element: rgba(120, 120, 130, 0.3);
 $light-theme-buttonTextColor: #222;
 $light-theme-buttonTextColor2: #777;
-.ChartJS {
+
+$dark-theme--bgFill: #222;
+$dark-theme--bgFill2: #444;
+$dark-theme--bordersColor: #555;
+$dark-theme--AxisTextColor: #999;
+$dark-theme--focus: rgba(50, 50, 50, 0.7);
+$dark-theme--focus-moce-element: rgba(80, 80, 80, 0.5);
+$dark-theme-buttonTextColor: #999;
+$dark-theme-buttonTextColor2: #777;
+
+svg.ChartJS--light-theme {
   .chart-background {
     fill: $light-theme--bgFill;
   }
@@ -51,59 +63,66 @@ $light-theme-buttonTextColor2: #777;
   }
 }
 
-.ChartJS-map {
+
+.ChartJS-map--light-theme {
   .chart-background-map {
     fill: $light-theme--bgFill;
   }
 
   .not-selected-bg-map {
-    fill: rgba(220, 220, 230, 0.5);
+    fill: $light-theme--focus;
   }
   .focus-move-element {
-    fill: rgba(120, 120, 130, 0.3);
+    fill: $light-theme--focus-moce-element;
   }
   .focus-move-element-scroll {
     fill: transparent;
   }
 }
 
-button.chart-select-button {
-  margin: 10px;
-  padding: 0px 15px;
-  background: $light-theme--bgFill2;
-  border: none;
-  border-radius: 10px;
-  display: flex;
 
-  &:hover {
-    span {
-      transition: 0.3s;
-      color: $light-theme-buttonTextColor2;
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  .chart--circle-color {
-    margin: auto;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-  }
-
-  .chart--circle-color-non-select {
+.chart-select--container--light-theme {
+    padding: 20px 0;
     display: flex;
 
-    &::after {
-        content: '';
-        margin: auto;
-        background: #eee;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-    }
+    button.chart-select-button {
+        margin: 10px;
+        padding: 0px 15px;
+        background: $light-theme--bgFill2;
+        border: none;
+        border-radius: 10px;
+        display: flex;
+      
+        &:hover {
+          span {
+            transition: 0.3s;
+            color: $light-theme-buttonTextColor2;
+          }
+        }
+      
+        &:focus {
+          outline: none;
+        }
+      
+        .chart--circle-color {
+          margin: auto;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+        }
+      
+        .chart--circle-color-non-select {
+          display: flex;
+      
+          &::after {
+              content: '';
+              margin: auto;
+              background: #eee;
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+          }
+      }
 }
 
   span {
@@ -112,5 +131,123 @@ button.chart-select-button {
     font-size: 2em;
     font-weight: 600;
     color: $light-theme-buttonTextColor;
+  }
+}
+
+// light theme
+
+svg.ChartJS--dark-theme {
+    .chart-background {
+      fill: $dark-theme--bgFill;
+    }
+  
+    .chartLine {
+      stroke-width: 3;
+    }
+  
+    .axis-values {
+      fill: $dark-theme--AxisTextColor;
+      font-family: $textFontFamily;
+      user-select: none;
+    }
+  
+    .axis-y-line {
+      stroke-width: 1;
+      stroke: $dark-theme--bordersColor;
+    }
+  
+    .notification-background {
+      fill: $dark-theme--bgFill;
+      stroke: $dark-theme--bordersColor;
+      rx: 5px;
+    }
+  
+    .notification-marker {
+      fill: $dark-theme--bgFill;
+    }
+  
+    .notification-markline {
+      stroke-width: 1;
+      stroke: $dark-theme--bordersColor;
+    }
+  
+    .notification-text,
+    .notification-text-caption {
+      font-family: $textFontFamily;
+      font-weight: 500;
+    }
+  
+    .notification-text {
+      font-weight: bold;
+    }
+}
+
+.ChartJS-map--dark-theme {
+    .chart-background-map {
+      fill: $dark-theme--bgFill;
+    }
+  
+    .not-selected-bg-map {
+        fill: $dark-theme--focus;
+      }
+      .focus-move-element {
+        fill: $dark-theme--focus-moce-element;
+      }
+    .focus-move-element-scroll {
+      fill: transparent;
+    }
+  }
+
+
+  .chart-select--container--dark-theme {
+    padding: 20px 0;
+    display: flex;
+
+    button.chart-select-button {
+        margin: 10px;
+        padding: 0px 15px;
+        background: $dark-theme--bgFill2;
+        border: none;
+        border-radius: 10px;
+        display: flex;
+      
+        &:hover {
+          span {
+            transition: 0.3s;
+            color: $dark-theme-buttonTextColor2;
+          }
+        }
+      
+        &:focus {
+          outline: none;
+        }
+      
+        .chart--circle-color {
+          margin: auto;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+        }
+      
+        .chart--circle-color-non-select {
+          display: flex;
+      
+          &::after {
+              content: '';
+              margin: auto;
+              background: #eee;
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+          }
+      }
+}
+
+  span {
+    margin-left: 10px;
+    font-family: $textFontFamily;
+    font-size: 2em;
+    font-weight: 600;
+    color: $dark-theme-buttonTextColor;
   }
 }

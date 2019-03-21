@@ -1,0 +1,62 @@
+$textFontFamily: "Segoe UI", Arial, sans-serif;
+$light-theme--bgFill: #fff;
+$light-theme--bgFill2: #eee;
+$light-theme--bordersColor: #eee;
+$light-theme--AxisTextColor: #ccc;
+$light-theme-buttonTextColor: #222;
+$light-theme-buttonTextColor2: #777;
+
+$dark-theme--bgFill: #222;
+$dark-theme--bgFill3: #333;
+$dark-theme--bgFill2: #444;
+$dark-theme--bordersColor: #555;
+$dark-theme--AxisTextColor: #999;
+$dark-theme-buttonTextColor: #999;
+$dark-theme-buttonTextColor2: #777;
+
+body {
+  .chart-theme--selector {
+    padding: 5px 15px;
+    margin: 5px;
+    font-family: $textFontFamily;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  h2 {
+    margin: 25px;
+    font-family: $textFontFamily;
+    font-size: 2em;
+  }
+
+  &.light-theme {
+    background: $light-theme--bgFill;
+
+    .chart-theme--selector {
+      background: $light-theme--bgFill2;
+      color: $light-theme-buttonTextColor;
+    }
+
+    h2 {
+      color: $light-theme-buttonTextColor;
+    }
+  }
+
+  &.dark-theme {
+    background: $dark-theme--bgFill3;
+
+    .chart-theme--selector {
+      background: $dark-theme--bgFill;
+      color: $dark-theme-buttonTextColor;
+    }
+
+    h2 {
+      color: $dark-theme-buttonTextColor;
+    }
+  }
+}

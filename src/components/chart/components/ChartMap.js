@@ -11,6 +11,7 @@ class CharMap extends Component {
     super(props);
     this.state = {
       isSvgMapDidMout: false,
+      svgClassName: props.className,
     };
 
     this.mapDragElement = null;
@@ -42,6 +43,15 @@ class CharMap extends Component {
       isSvgMapDidMout: true,
       range,
     });
+  }
+
+  componentWillReceiveProps(props) {
+    const { className } = props;
+    if (className !== undefined) {
+      this.setState({
+        svgClassName: className,
+      });
+    }
   }
 
 
@@ -112,13 +122,13 @@ class CharMap extends Component {
   render() {
     const { inputData } = this.props;
     const {
-      isSvgMapDidMout, range,
+      isSvgMapDidMout, range, svgClassName,
     } = this.state;
     const { chartSVGMapProps } = this.props; // eslint-disable-line
     const { chartParamsMap } = this;
 
     return (
-      <svg className={this.containerClassName} {...chartSVGMapProps}>
+      <svg className={svgClassName} {...chartSVGMapProps}>
         { isSvgMapDidMout
           ? (
             <React.Fragment>
