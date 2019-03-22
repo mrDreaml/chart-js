@@ -84,7 +84,7 @@ class CharMap extends Component {
     }
     const { inputData } = this.props;
     const itemsQuantity = inputData.columns.x.length;
-    if (rangeAfter[1] - rangeAfter[0] > 1) {
+    if (rangeAfter[1] - rangeAfter[0] > 2) {
       if (rangeAfter[0] < 0) {
         rangeAfter[0] = 0;
         rangeAfter[1] = rangeBefore[1];

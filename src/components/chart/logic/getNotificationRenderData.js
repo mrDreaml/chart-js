@@ -8,8 +8,11 @@ export default function getNotificationRenderData(e) {
   if (chartTop === undefined) {
     chartTop = 0;
   }
-  const posChartX = e.pageX - this.containerOffsetLeft - chartLeft;
-  const posChartY = e.pageY;
+  window.addEventListener('resize', this.updateDimensions);
+  const { id: containerID } = this.props.chartSVGProps; // eslint-disable-line
+  const chartContainer = document.getElementById(containerID);
+  const posChartY = e.clientY - chartContainer.getBoundingClientRect().y;
+  const posChartX = e.clientX - this.containerOffsetLeft - chartLeft;
   const { colors } = this.props.inputData; // eslint-disable-line
   const { xStep, yStep, chartHeight } = chartParams;
   const columnIndex = Math.round(posChartX / xStep);
@@ -61,7 +64,7 @@ export default function getNotificationRenderData(e) {
       isShow: true,
       mousePosition: {
         x: chartLeft + columnIndex * xStep,
-        y: chartTop + posChartY,
+        y: posChartY,
       },
       noteText,
       dotMarks,

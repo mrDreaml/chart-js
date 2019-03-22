@@ -46,12 +46,12 @@ class App extends Component {
           const chartSVGMapProps = {
             id: `chartJS-container-map${i}`, className: 'ChartJS-map', height: '100px', width: '100%', position: 'relative',
           };
-          const key = Object.values(currentData.columns).reduce((acc, v) => acc + v) + i;
+          const key = Object.values(currentData.columns.x).slice(0, 10).reduce((acc, v) => acc + v) + i;
           const chartName = `Chart №${i}`;
           return (
-            <Fragment>
+            <Fragment key={key}>
               <h2>{chartName}</h2>
-              <ChartJS key={key} inputData={currentData} chartSVGProps={chartSVGProps} chartSVGMapProps={chartSVGMapProps} theme={this.themes[theme]} />
+              <ChartJS key={`${key}chart`} inputData={currentData} chartSVGProps={chartSVGProps} chartSVGMapProps={chartSVGMapProps} theme={this.themes[theme]} />
             </Fragment>
           );
         })}

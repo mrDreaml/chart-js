@@ -47,6 +47,7 @@ class ChartJS extends Component {
       const chartContainer = document.getElementById(containerID);
       this.containerWidth = chartContainer.clientWidth || chartContainer.getBoundingClientRect().width;
       this.containerHeight = chartContainer.clientHeight || chartContainer.getBoundingClientRect().height;
+
       this.containerOffsetLeft = chartContainer.getBoundingClientRect().left;
       this.Range = [0, 90];
 

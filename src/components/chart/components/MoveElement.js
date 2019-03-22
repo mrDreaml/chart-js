@@ -3,7 +3,7 @@ import React from 'react';
 export default function MoveElement(props) {
   const { chartParamsMap, range, callbackEvent } = props;
   const { xStep } = chartParamsMap;
-  const borderWidth = 10;
+  const borderWidth = 20;
   const height = chartParamsMap.chartHeight;
   const leftWidth = range[0] * xStep;
   const selectedWidth = (range[1] - range[0]) * xStep;
