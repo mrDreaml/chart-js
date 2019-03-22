@@ -134,7 +134,7 @@ svg.ChartJS--light-theme {
   }
 }
 
-// light theme
+// dark theme
 
 svg.ChartJS--dark-theme {
     .chart-background {
@@ -177,6 +177,10 @@ svg.ChartJS--dark-theme {
       font-weight: 500;
     }
   
+    .notification-text-caption {
+        fill: $dark-theme--AxisTextColor;
+    }
+
     .notification-text {
       font-weight: bold;
     }

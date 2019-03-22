@@ -65,7 +65,12 @@ class CharMap extends Component {
   }
 
   dragAnimation(e) {
-    const posMapX = e.clientX - this.containerOffsetLeft;
+    let posMapX;
+    if (e.type === 'touchmove') {
+      posMapX = e.touches[0].clientX - this.containerOffsetLeft;
+    } else if (e.type === 'mousemove') {
+      posMapX = e.clientX - this.containerOffsetLeft;
+    }
     const { xStep } = this.chartParamsMap;
     const columnIndex = Math.round(posMapX / xStep);
     const { range: rangeBefore } = this.state;
@@ -101,7 +106,12 @@ class CharMap extends Component {
         this.mapDragElement = {
           type: 'scroll',
         };
-        const posMapX = e.clientX - this.containerOffsetLeft;
+        let posMapX;
+        if (e.type === 'touchstart') {
+          posMapX = e.touches[0].clientX - this.containerOffsetLeft;
+        } else if (e.type === 'mousedown') {
+          posMapX = e.clientX - this.containerOffsetLeft;
+        }
         const { xStep } = this.chartParamsMap;
         const columnIndex = Math.round(posMapX / xStep);
         const { range: rangeBefore } = this.state;
@@ -113,8 +123,10 @@ class CharMap extends Component {
         };
       }
       this.chartContainerMap.addEventListener('mousemove', this.dragAnimation, false);
+      this.chartContainerMap.addEventListener('touchmove', this.dragAnimation, false);
     } else if (this.mapDragElement !== null) {
       this.chartContainerMap.removeEventListener('mousemove', this.dragAnimation, false);
+      this.chartContainerMap.removeEventListener('touchmove', this.dragAnimation, false);
       this.mapDragElement = null;
     }
   }

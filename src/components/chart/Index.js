@@ -229,9 +229,3 @@ class ChartJS extends Component {
 }
 
 export default ChartJS;
-
-// on/off chart columns
-
-// map marker fixed to bg
-
-// styling, night theme

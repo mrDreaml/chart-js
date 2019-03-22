@@ -23,12 +23,14 @@ function InfoBlock(props) {
     <React.Fragment>
       <rect className="notification-background" x={xStart} y={yStart} width={width} height={height} />
       {noteText.map((t, i) => {
-        const textStyle = {
-          fill: t.color,
-        };
+        let textStyle = {};
         let classNameCaptopn = '';
         if (t.type === 'caption') {
           classNameCaptopn += '-caption';
+        } else {
+          textStyle = {
+            fill: t.color,
+          };
         }
         const key = t.value + i * lineHeight;
         return <text className={`notification-text${classNameCaptopn}`} key={key} x={xTextPos} y={yTextPos + i * lineHeight} style={textStyle}>{t.value}</text>;

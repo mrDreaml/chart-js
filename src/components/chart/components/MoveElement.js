@@ -10,9 +10,9 @@ export default function MoveElement(props) {
   const rightWidth = leftWidth + selectedWidth - borderWidth;
   return (
     <React.Fragment>
-      <rect onMouseDown={e => callbackEvent(e, 0)} onMouseUp={callbackEvent} className="focus-move-element" height={height} width={borderWidth} x={leftWidth} />
-      <rect onMouseDown={e => callbackEvent(e, [0, 1])} onMouseUp={callbackEvent} className="focus-move-element-scroll" height={height} width={selectedWidth - borderWidth - borderWidth} x={leftWidth + borderWidth} />
-      <rect onMouseDown={e => callbackEvent(e, 1)} onMouseUp={callbackEvent} className="focus-move-element" height={height} width={borderWidth} x={rightWidth} />
+      <rect onMouseDown={e => callbackEvent(e, 0)} onTouchStart={e => callbackEvent(e, 0)} onMouseUp={callbackEvent} onTouchEnd={callbackEvent} className="focus-move-element" height={height} width={borderWidth} x={leftWidth} />
+      <rect onMouseDown={e => callbackEvent(e, [0, 1])} onTouchStart={e => callbackEvent(e, [0, 1])} onMouseUp={callbackEvent} onTouchEnd={callbackEvent} className="focus-move-element-scroll" height={height} width={selectedWidth - borderWidth - borderWidth} x={leftWidth + borderWidth} />
+      <rect onMouseDown={e => callbackEvent(e, 1)} onTouchStart={e => callbackEvent(e, 1)} onMouseUp={callbackEvent} onTouchEnd={callbackEvent} className="focus-move-element" height={height} width={borderWidth} x={rightWidth} />
     </React.Fragment>
   );
 }
