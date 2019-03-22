@@ -6,9 +6,9 @@ export default function (inputData, selectName) {
   chartColumnsShow[selectName] = !chartColumnsShow[selectName];
   const columnValues = Object.assign({}, currentColumnValues);
   let timeNow = Date.now();
-  const durationI = 20;
-  const delay = 1000 / 160;
-  const stretchRatio = 1.2;
+  const durationI = 10;
+  const delay = 1000 / 200;
+  const stretchRatio = 1.3;
   let hiddenChartColumn;
   if (chartColumnsShow[selectName]) {
     const hiddenChartColumns = cutColumnValue(inputData.columns, this.Range);

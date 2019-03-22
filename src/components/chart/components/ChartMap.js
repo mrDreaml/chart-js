@@ -93,7 +93,7 @@ class CharMap extends Component {
         rangeAfter[1] = itemsQuantity - 1;
         rangeAfter[0] = rangeBefore[0];
       }
-      this.props.chartTransformAnimation(rangeAfter); // eslint-disable-line
+      this.props.callbackChartChangeRange(rangeAfter); // eslint-disable-line
       this.setState({
         range: rangeAfter,
       });

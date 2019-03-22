@@ -32,12 +32,6 @@ class App extends Component {
 
   render() {
     const { theme } = this.state;
-    const chartSVGProps = {
-      id: 'chartJS-container', className: 'ChartJS', height: '500px', width: '100%', position: 'relative',
-    };
-    const chartSVGMapProps = {
-      id: 'chartJS-container-map', className: 'ChartJS-map', height: '100px', width: '100%', position: 'relative',
-    };
 
     return (
       <Fragment>
@@ -45,7 +39,22 @@ class App extends Component {
           <button className="chart-theme--selector" onClick={this.changeTheme} type="button">{this.themes[theme]}</button>
         </header>
         <h2>Followers</h2>
-        <ChartJS inputData={inputData[4]} chartSVGProps={chartSVGProps} chartSVGMapProps={chartSVGMapProps} theme={this.themes[theme]} />
+        { inputData.map((currentData, i) => {
+          const chartSVGProps = {
+            id: `chartJS-container${i}`, className: 'ChartJS', height: '500px', width: '100%', position: 'relative',
+          };
+          const chartSVGMapProps = {
+            id: `chartJS-container-map${i}`, className: 'ChartJS-map', height: '100px', width: '100%', position: 'relative',
+          };
+          const key = Object.values(currentData.columns).reduce((acc, v) => acc + v) + i;
+          const chartName = `Chart №${i}`;
+          return (
+            <Fragment>
+              <h2>{chartName}</h2>
+              <ChartJS key={key} inputData={currentData} chartSVGProps={chartSVGProps} chartSVGMapProps={chartSVGMapProps} theme={this.themes[theme]} />
+            </Fragment>
+          );
+        })}
       </Fragment>
     );
   }

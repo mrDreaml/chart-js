@@ -218,7 +218,7 @@ class ChartJS extends Component {
               chartSVGMapProps={chartSVGMapProps}
               className={`${this.chartSVGMapClassName}--${theme}`}
               inputData={inputData}
-              chartTransformAnimation={this.chartChangeRange}
+              callbackChartChangeRange={this.chartChangeRange}
             />
             <ChartSelector inputData={inputData} chartSelect={chartColumnsShow} theme={theme} callback={this.chartSelect} />
           </Fragment>
