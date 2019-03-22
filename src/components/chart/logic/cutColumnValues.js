@@ -1,8 +1,6 @@
 export default function (columns, range) {
   const cutColumnsValues = {};
-  Object.entries(columns).forEach((col) => {
-    const key = col[0];
-    const value = col[1];
+  Object.entries(columns).forEach(([key, value]) => {
     cutColumnsValues[key] = value.slice(...range);
   });
 

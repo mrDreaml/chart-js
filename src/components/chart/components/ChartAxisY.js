@@ -16,8 +16,8 @@ export default (props) => {
   if (chartTop === undefined) {
     chartTop = 0;
   }
-
-  return Array(chartRows).fill().map((e, i) => {
+  const arr = [];
+  for (let i = 0; i < chartRows; i += 1) {
     const yPointValue = Math.round(i * yAxisScale);
     const marginBetweenPoints = yStep * yAxisScale;
     const xStartPosition = chartLeft;
@@ -25,11 +25,12 @@ export default (props) => {
     const yPosition = chartTop + chartHeight - marginBetweenPoints * (i);
     const key = yPointValue * marginBetweenPoints + i;
     const lineTopMargin = 10;
-    return (
+    arr.push(
       <React.Fragment key={`${key}fragment`}>
         <text className="axis-y-values axis-values" key={`${key}axisY`} x={xStartPosition} y={yPosition - lineTopMargin}>{yPointValue}</text>
         <line className="axis-y-line" key={`${key}line`} x1={xStartPosition} y1={yPosition} x2={xEndPosition} y2={yPosition} />
-      </React.Fragment>
+      </React.Fragment>,
     );
-  });
+  }
+  return arr;
 };
