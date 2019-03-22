@@ -45,8 +45,8 @@ class ChartJS extends Component {
       window.addEventListener('resize', this.updateDimensions);
       const { id: containerID } = this.props.chartSVGProps; // eslint-disable-line
       const chartContainer = document.getElementById(containerID);
-      this.containerWidth = chartContainer.clientWidth;
-      this.containerHeight = chartContainer.clientHeight;
+      this.containerWidth = chartContainer.clientWidth || chartContainer.getBoundingClientRect().width;
+      this.containerHeight = chartContainer.clientHeight || chartContainer.getBoundingClientRect().height;
       this.containerOffsetLeft = chartContainer.getBoundingClientRect().left;
       this.Range = [0, 90];
 

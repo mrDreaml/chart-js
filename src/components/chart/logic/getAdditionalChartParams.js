@@ -25,7 +25,7 @@ export default function getAdditionalChartParams(columns) {
   if (isNaN(yStep)) {
     return null;
   }
-  
+
   const xStep = (this.chartWidth) / (columns.x.length - 1);
   if (this.chartColumns && this.chartRows) {
     const xAxisScale = (columns.x.length - 1) / this.chartColumns;

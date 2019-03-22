@@ -26,8 +26,8 @@ class CharMap extends Component {
 
     const { id } = this.props.chartSVGMapProps; // eslint-disable-line
     this.chartContainerMap = document.getElementById(id);
-    this.containerMapWidth = this.chartContainerMap.clientWidth;
-    this.containerMapHeight = this.chartContainerMap.clientHeight;
+    this.containerMapWidth = this.chartContainerMap.clientWidth || this.chartContainerMap.getBoundingClientRect().width;
+    this.containerMapHeight = this.chartContainerMap.clientHeight || this.chartContainerMap.getBoundingClientRect().height;
     this.containerOffsetLeft = this.chartContainerMap.getBoundingClientRect().left;
 
     this.chartParamsMap = {
