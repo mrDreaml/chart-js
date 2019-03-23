@@ -84,7 +84,8 @@ class CharMap extends PureComponent {
     }
     const { inputData } = this.props;
     const itemsQuantity = inputData.columns.x.length;
-    if (rangeAfter[1] - rangeAfter[0] > 2) {
+    const minFlipSize = 20;
+    if (rangeAfter[1] - rangeAfter[0] > minFlipSize) {
       if (rangeAfter[0] < 0) {
         rangeAfter[0] = 0;
         rangeAfter[1] = rangeBefore[1];

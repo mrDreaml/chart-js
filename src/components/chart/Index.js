@@ -78,6 +78,8 @@ class ChartJS extends Component {
         getAdditionalChartParams.call(chartParams, currentColumnValues),
       );
 
+      this.yMaxValue = chartParams.yMaxValue;
+
       this.setState({
         isSvgDidMout: true,
         currentColumnValues,
@@ -180,12 +182,13 @@ class ChartJS extends Component {
               />
               <ChartAxisX
                 chartParams={chartParams}
-                chartColumnValues={currentColumnValues.x}
+                chartColumnValues={inputData.columns.x}
+                range={this.Range}
               />
               { Object.values(chartColumnsShow).includes(true)
                 ? (
                   <Fragment>
-                    <ChartAxisY chartParams={chartParams} />
+                    <ChartAxisY chartParams={chartParams} globalYmaxValue={this.yMaxValue} />
                     {Object.entries(currentColumnValues).map((col, i) => {
                       const colName = col[0];
                       const colValue = col[1];

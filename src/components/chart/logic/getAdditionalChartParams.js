@@ -28,13 +28,10 @@ export default function getAdditionalChartParams(columns) {
 
   const xStep = (this.chartWidth) / (columns.x.length - 1);
   if (this.chartColumns && this.chartRows) {
-    const xAxisScale = (columns.x.length - 1) / this.chartColumns;
-    const yAxisScale = yMaxValue / this.chartRows;
     return {
       xStep,
       yStep,
-      xAxisScale,
-      yAxisScale,
+      yMaxValue,
     };
   }
   return {
