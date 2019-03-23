@@ -22,4 +22,4 @@ function ChartSelector(props) {
   );
 }
 
-export default React.memo(ChartSelector);
+export default ChartSelector;
