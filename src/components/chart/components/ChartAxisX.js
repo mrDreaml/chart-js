@@ -18,7 +18,8 @@ export default (props) => {
   }
   const arr = [];
   for (let i = 0; i < chartColumns; i += 1) {
-    const xPointValue = Math.round((i + 0.5) * xAxisScale);
+    i += 0.5;
+    const xPointValue = Math.round((i) * xAxisScale);
     const yPos = chartTop + chartHeight + 30;
     const marginBetweenPoints = xStep * xAxisScale;
     const dateValue = (() => {
