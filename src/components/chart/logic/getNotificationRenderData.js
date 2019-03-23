@@ -1,6 +1,7 @@
 export default function getNotificationRenderData(e) {
   const { currentColumnValues, chartParams } = this.state;
   let { chartLeft, chartTop } = chartParams;
+  const { xStep, yStep, chartHeight, chartWidth } = chartParams;
 
   if (chartLeft === undefined) {
     chartLeft = 0;
@@ -14,7 +15,6 @@ export default function getNotificationRenderData(e) {
   const posChartY = e.clientY - chartContainer.getBoundingClientRect().y;
   const posChartX = e.clientX - this.containerOffsetLeft - chartLeft;
   const { colors } = this.props.inputData; // eslint-disable-line
-  const { xStep, yStep, chartHeight } = chartParams;
   const columnIndex = Math.round(posChartX / xStep);
   if (currentColumnValues.x.length > columnIndex) {
     const noteText = [];
@@ -63,6 +63,7 @@ export default function getNotificationRenderData(e) {
         x: chartLeft + columnIndex * xStep,
         y: posChartY,
       },
+      chartWidth,
       noteText,
       dotMarks,
       markLine,

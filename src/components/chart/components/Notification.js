@@ -1,7 +1,8 @@
 import React from 'react';
 
 function InfoBlock(props) {
-  const { noteText, mousePosition } = props;
+  const { noteText, mousePosition, chartWidth } = props;
+
 
   // Default Property
   const lineHeight = 25;
@@ -12,8 +13,14 @@ function InfoBlock(props) {
   // Shape
   const width = paddingLeft + 120;
   const height = paddingTop + noteText.length * lineHeight - 10;
-  const xStart = mousePosition.x + margin;
-  const yStart = mousePosition.y - margin - height;
+  let xStart = mousePosition.x + margin;
+  if (xStart + width >= chartWidth) {
+    xStart -= width;
+  }
+  let yStart = mousePosition.y - margin - height;
+  if (yStart - height <= 0) {
+    yStart += height * 1.2;
+  }
 
   // Text
   const yTextPos = yStart + paddingTop;
@@ -57,13 +64,13 @@ const MarkLine = (props) => {
 
 function Notification(props) {
   const {
-    noteText, mousePosition, dotMarks, markLine,
+    noteText, mousePosition, dotMarks, markLine, chartWidth,
   } = props;
   return (
     <React.Fragment>
       <MarkLine {...markLine} />
-      <InfoBlock noteText={noteText} mousePosition={mousePosition} />
       <Marker dotMarks={dotMarks} />
+      <InfoBlock noteText={noteText} mousePosition={mousePosition} chartWidth={chartWidth} />
     </React.Fragment>
   );
 }

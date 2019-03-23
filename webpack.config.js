@@ -27,7 +27,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
-  mode: 'production',
+  mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
