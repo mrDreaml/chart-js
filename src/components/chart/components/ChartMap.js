@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import Chart from './Chart';
 import RangeNotSelected from './RangeNotSelected';
@@ -6,7 +6,7 @@ import MoveElement from './MoveElement';
 import getAdditionalChartParams from '../logic/getAdditionalChartParams';
 
 
-class CharMap extends Component {
+class CharMap extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
