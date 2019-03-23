@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function RangeNotSelected(props) {
-    const { chartParamsMap, range, callbackEvent } = props; // eslint-disable-line
+export default ({ chartParamsMap, range, callbackEvent }) => {
   const { xStep, chartWidth } = chartParamsMap;
   const height = chartParamsMap.chartHeight;
   const leftWidth = range[0] * xStep;
@@ -15,4 +14,4 @@ export default function RangeNotSelected(props) {
       <rect onMouseUp={callbackEvent} className="not-selected-bg-map" height={height} width={rightWidth >= 0 ? rightWidth : 0} x={rightX} />
     </React.Fragment>
   );
-}
+};

@@ -1,10 +1,7 @@
 import React from 'react';
 
 
-export default (props) => {
-  const {
-    chartParams, chartColumnValues, styles,
-  } = props;
+export default ({ chartParams, chartColumnValues, styles }) => {
   const { xStep, yStep, chartHeight } = chartParams;
 
   let { chartLeft, chartTop } = chartParams;

@@ -1,9 +1,6 @@
 import React from 'react';
 
-function InfoBlock(props) {
-  const { noteText, mousePosition, chartWidth } = props;
-
-
+const InfoBlock = ({ noteText, mousePosition, chartWidth }) => {
   // Default Property
   const lineHeight = 25;
   const margin = 15;
@@ -46,16 +43,13 @@ function InfoBlock(props) {
   );
 }
 
-const Marker = (props) => {
-  const { dotMarks } = props;
-  return dotMarks.map((dotMark, i) => {
-    const { x, y, color } = dotMark;
-    const radius = 4;
-    const strokeWidth = 2;
-    const key = `${x * y * radius + i}notification-marker`;
-    return <circle key={key} className="notification-marker" cx={x} cy={y} r={radius} stroke={color} strokeWidth={strokeWidth} />;
-  });
-};
+const Marker = ({ dotMarks }) => dotMarks.map((dotMark, i) => {
+  const { x, y, color } = dotMark;
+  const radius = 4;
+  const strokeWidth = 2;
+  const key = `${x * y * radius + i}notification-marker`;
+  return <circle key={key} className="notification-marker" cx={x} cy={y} r={radius} stroke={color} strokeWidth={strokeWidth} />;
+});
 
 const MarkLine = (props) => {
   const { x, y, chartHeight } = props;
