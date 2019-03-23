@@ -25,11 +25,8 @@ export default function getNotificationRenderData(e) {
       if (value !== null) {
         if (key === 'x') {
           const dateValue = (() => {
-            let dateValueS = new Date(value[columnIndex]).toDateString().split(' ');
-            dateValueS.pop();
-            dateValueS[0] += ', ';
-            dateValueS = dateValueS.join(' ');
-            return dateValueS;
+            const dateValueS = new Date(value[columnIndex]).toDateString().split(' ');
+            return [dateValueS[1], dateValueS[2]].join(', ');
           })();
           noteText.push({
             type: 'caption',

@@ -16,21 +16,16 @@ export default (props) => {
   if (chartTop === undefined) {
     chartTop = 0;
   }
-
-  return Array(chartColumns).fill().map((e, i) => {
-    i += 0.5; // values to center not to start
-    const xPointValue = Math.round(i * xAxisScale);
+  const arr = [];
+  for (let i = 0; i < chartColumns; i += 1) {
+    const xPointValue = Math.round((i + 0.5) * xAxisScale);
     const yPos = chartTop + chartHeight + 30;
     const marginBetweenPoints = xStep * xAxisScale;
     const dateValue = (() => {
-      let dateValueS;
-      dateValueS = new Date(chartColumnValues[xPointValue]).toDateString();
-      dateValueS = dateValueS.split(' ');
-      dateValueS.shift();
-      dateValueS.pop();
-      dateValueS = dateValueS.join(' ');
-      return dateValueS;
+      const dateValueS = new Date(chartColumnValues[xPointValue]).toDateString().split(' ');
+      return [dateValueS[1], dateValueS[2]].join(' ');
     })();
-    return <text className="axis-x-values axis-values" key={dateValue + i} x={chartLeft + marginBetweenPoints * (i)} y={yPos}>{dateValue}</text>;
-  });
+    arr.push(<text className="axis-x-values axis-values" key={`${dateValue + i}`} x={chartLeft + marginBetweenPoints * (i)} y={yPos}>{dateValue}</text>);
+  }
+  return arr;
 };
