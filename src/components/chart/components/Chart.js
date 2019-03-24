@@ -1,8 +1,12 @@
 import React from 'react';
 
+export default ({
+  chartParams, chartColumnValues, styles,
+}) => {
+  const {
+    xStep, yStep, chartHeight,
+  } = chartParams;
 
-export default ({ chartParams, chartColumnValues, styles }) => {
-  const { xStep, yStep, chartHeight } = chartParams;
 
   let { chartLeft, chartTop } = chartParams;
 
@@ -12,7 +16,7 @@ export default ({ chartParams, chartColumnValues, styles }) => {
   if (chartTop === undefined) {
     chartTop = 0;
   }
-  return chartColumnValues.map((e, i) => {
+  const renderData = chartColumnValues.map((e, i) => {
     const x1Coordinate = chartLeft + (i - 1) * xStep;
     const x2Coordinate = chartLeft + i * xStep;
     const y1Coordinate = chartTop + chartHeight - chartColumnValues[i - 1] * yStep;
@@ -21,4 +25,5 @@ export default ({ chartParams, chartColumnValues, styles }) => {
     return i !== 0
       ? (<line className={`chartLine ${i}`} key={key} x1={x1Coordinate} y1={y1Coordinate} x2={x2Coordinate} y2={y2Coordinate} {...styles} />) : null;
   });
+  return renderData;
 };

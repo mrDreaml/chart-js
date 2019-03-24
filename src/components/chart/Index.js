@@ -49,7 +49,6 @@ class ChartJS extends Component {
       this.containerHeight = chartContainer.clientHeight || chartContainer.getBoundingClientRect().height;
 
       this.containerOffsetLeft = chartContainer.getBoundingClientRect().left;
-      this.Range = [0, 90];
 
       const xAxisHeight = 30;
       const chartMargin = 10;
@@ -63,6 +62,7 @@ class ChartJS extends Component {
         xAxisHeight,
         chartRows: 5,
         chartColumns: 6,
+        range: [0, 90],
       };
 
       const { columns } = inputData; // eslint-disable-line
@@ -72,13 +72,13 @@ class ChartJS extends Component {
           chartColumnsShow[columnKey] = true;
         }
       });
-      const currentColumnValues = cutColumnValue(columns, this.Range);
+      const currentColumnValues = cutColumnValue(columns, chartParams.range);
       Object.assign(
         chartParams,
         getAdditionalChartParams.call(chartParams, currentColumnValues),
       );
 
-      this.yMaxValue = chartParams.yMaxValue;
+      this.yMaxValue = getAdditionalChartParams.call(chartParams, columns).yMaxValue;
 
       this.setState({
         isSvgDidMout: true,
@@ -109,9 +109,9 @@ class ChartJS extends Component {
 
 
   chartChangeRange(rangeAfter) {
-    this.Range = rangeAfter;
-    const { columns } = this.props.inputData; // eslint-disable-line
     const { chartParams, chartColumnsShow } = this.state;
+    chartParams.range = rangeAfter;
+    const { columns } = this.props.inputData; // eslint-disable-line
     const rangeAfterValues = cutColumnValue(columns, rangeAfter);
     Object.entries(chartColumnsShow).forEach((col) => {
       const key = col[0];
@@ -126,6 +126,7 @@ class ChartJS extends Component {
     );
     this.setState({
       currentColumnValues: rangeAfterValues,
+      chartParams,
     });
   }
 
@@ -154,6 +155,7 @@ class ChartJS extends Component {
 
   render() {
     const { inputData } = this.props;
+
     const {
       notification,
       isSvgDidMout,
@@ -183,7 +185,6 @@ class ChartJS extends Component {
               <ChartAxisX
                 chartParams={chartParams}
                 chartColumnValues={inputData.columns.x}
-                range={this.Range}
               />
               { Object.values(chartColumnsShow).includes(true)
                 ? (
@@ -218,7 +219,7 @@ class ChartJS extends Component {
         {isSvgDidMout ? (
           <Fragment>
             <ChartMap
-              range={this.Range}
+              range={chartParams.range}
               chartSVGMapProps={chartSVGMapProps}
               className={`${this.chartSVGMapClassName}--${theme}`}
               inputData={inputData}

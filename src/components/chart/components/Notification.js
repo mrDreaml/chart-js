@@ -36,12 +36,12 @@ const InfoBlock = ({ noteText, mousePosition, chartWidth }) => {
             fill: t.color,
           };
         }
-        const key = t.value + i * lineHeight;
+        const key = `${yTextPos + i * lineHeight + xTextPos}infoBlock`;
         return <text className={`notification-text${classNameCaptopn}`} key={key} x={xTextPos} y={yTextPos + i * lineHeight} style={textStyle}>{t.value}</text>;
       })}
     </React.Fragment>
   );
-}
+};
 
 const Marker = ({ dotMarks }) => dotMarks.map((dotMark, i) => {
   const { x, y, color } = dotMark;

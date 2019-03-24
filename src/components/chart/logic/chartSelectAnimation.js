@@ -11,7 +11,7 @@ export default function (inputData, selectName) {
   const stretchRatio = 1.3;
   let hiddenChartColumn;
   if (chartColumnsShow[selectName]) {
-    const hiddenChartColumns = cutColumnValue(inputData.columns, this.Range);
+    const hiddenChartColumns = cutColumnValue(inputData.columns, chartParams.range);
     hiddenChartColumn = hiddenChartColumns[selectName];
     Object.assign(
       chartParams,
@@ -62,6 +62,7 @@ export default function (inputData, selectName) {
           self.setState({
             chartColumnsShow,
             currentColumnValues: columnValues,
+            chartParams,
           });
         }, delay);
       }

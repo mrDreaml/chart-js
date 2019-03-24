@@ -154,6 +154,7 @@ class CharMap extends PureComponent {
                     stroke: inputData.colors[colName],
                   };
                   const key = `${colName + colValue[i]}map`;
+                  chartParamsMap.range = range;
                   return <Chart key={key} chartParams={chartParamsMap} chartColumnValues={colValue} styles={chartStyle} />;
                 }
                 return null;
