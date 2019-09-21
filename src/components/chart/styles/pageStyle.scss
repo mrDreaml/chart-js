@@ -48,10 +48,10 @@ body {
   }
 
   &.dark-theme {
-    background: $dark-theme--bgFill3;
+    background: $dark-theme--bgFill;
 
     .chart-theme--selector {
-      background: $dark-theme--bgFill;
+      background: $dark-theme--bgFill2;
       color: $dark-theme-buttonTextColor;
     }
 

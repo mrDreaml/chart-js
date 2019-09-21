@@ -24,10 +24,13 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
   },
+  optimization: {
+    minimize: true,
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
-  mode: 'production',
+  mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -35,5 +38,8 @@ module.exports = {
     port: 9000,
     disableHostCheck: true,
     hot: true,
+  },
+  performance: {
+    hints: false,
   },
 };

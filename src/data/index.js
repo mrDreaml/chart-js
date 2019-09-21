@@ -10,5 +10,4 @@ inputData.forEach((charts) => {
   charts.columns = newColumns; // eslint-disable-line
 });
 
-
 export default inputData;
