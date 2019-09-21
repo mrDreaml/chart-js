@@ -17,20 +17,8 @@ $dark-theme--focus-moce-element: rgba(80, 80, 80, 0.5);
 $dark-theme-buttonTextColor: #999;
 $dark-theme-buttonTextColor2: #777;
 
-[class^="ChartJS"] {
-     height: 500px;
-     width: 100%;
-     position: relative;
-}
-
-[class^="ChartJS-map"] {
-  height: 100px;
-  width: 100%;
-  position: relative;
-}
-
-svg[class*="light-theme"],
-svg[class*="dark-theme"] {
+svg.ChartJS--light-theme,
+svg.ChartJS--dark-theme {
   .chartLine {
     stroke-width: 3;
   }
@@ -70,7 +58,8 @@ svg.ChartJS-map--light-theme, svg.ChartJS-map--dark-theme {
   }
 }
 
-[class*="chart-select--container"] {
+.chart-select--container--light-theme,
+.chart-select--container--dark-theme {
   padding: 20px 0;
   display: flex;
 
@@ -156,11 +145,11 @@ svg.ChartJS--light-theme {
 }
 
 .ChartJS-map--light-theme {
-  .chart-background {
+  .chart-background-map {
     fill: $light-theme--bgFill;
   }
 
-  .not-selected-bg {
+  .not-selected-bg-map {
     fill: $light-theme--focus;
   }
   .focus-move-element {
@@ -232,10 +221,10 @@ svg.ChartJS--dark-theme {
 }
 
 .ChartJS-map--dark-theme {
-  .chart-background {
+  .chart-background-map {
     fill: $dark-theme--bgFill;
   }
-  .not-selected-bg {
+  .not-selected-bg-map {
     fill: $dark-theme--focus;
   }
   .focus-move-element {

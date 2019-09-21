@@ -1,5 +1,4 @@
 module.exports = {
-  parser: "babel-eslint",
   env: {
     browser: true,
     es6: true,
@@ -22,15 +21,5 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": "off",
     "react/prop-types": 0,
-    "max-len": [
-      2,
-      {
-        "code": 120,
-        "ignoreUrls": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true
-      }
-    ],
   },
 };
