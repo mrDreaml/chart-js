@@ -1,5 +1,4 @@
-export default function getNotificationRenderData(e) {
-  const { currentColumnValues, chartParams } = this.state;
+export default function getNotificationRenderData(currentColumnValues, chartParams, chartContainer, colors, e) {
   let { chartLeft, chartTop } = chartParams;
   const { xStep, yStep, chartHeight, chartWidth } = chartParams;
 
@@ -9,12 +8,10 @@ export default function getNotificationRenderData(e) {
   if (chartTop === undefined) {
     chartTop = 0;
   }
-  window.addEventListener('resize', this.updateDimensions);
-  const { id: containerID } = this.props.chartSVGProps; // eslint-disable-line
-  const chartContainer = document.getElementById(containerID);
+
   const posChartY = e.clientY - chartContainer.getBoundingClientRect().y;
-  const posChartX = e.clientX - this.containerOffsetLeft - chartLeft;
-  const { colors } = this.props.inputData; // eslint-disable-line
+  const containerOffsetLeft = chartContainer.getBoundingClientRect().left;
+  const posChartX = e.clientX - containerOffsetLeft - chartLeft;
   const columnIndex = Math.round(posChartX / xStep);
   if (currentColumnValues.x.length > columnIndex) {
     const noteText = [];
