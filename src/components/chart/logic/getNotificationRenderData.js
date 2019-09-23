@@ -1,4 +1,7 @@
-export default function getNotificationRenderData(currentColumnValues, chartParams, chartContainer, colors, e) {
+export default function getNotificationRenderData(currentColumnValues, chartParams, chartContainer, colors, mousePos) {
+  if (!mousePos) {
+    return;
+  }
   let { chartLeft, chartTop } = chartParams;
   const { xStep, yStep, chartHeight, chartWidth } = chartParams;
 
@@ -8,10 +11,9 @@ export default function getNotificationRenderData(currentColumnValues, chartPara
   if (chartTop === undefined) {
     chartTop = 0;
   }
-
-  const posChartY = e.clientY - chartContainer.getBoundingClientRect().y;
+  const posChartY = mousePos.clientY - chartContainer.getBoundingClientRect().y;
   const containerOffsetLeft = chartContainer.getBoundingClientRect().left;
-  const posChartX = e.clientX - containerOffsetLeft - chartLeft;
+  const posChartX = mousePos.clientX - containerOffsetLeft - chartLeft;
   const columnIndex = Math.round(posChartX / xStep);
   if (currentColumnValues.x.length > columnIndex) {
     const noteText = [];
@@ -55,7 +57,6 @@ export default function getNotificationRenderData(currentColumnValues, chartPara
     };
 
     return {
-      isShow: true,
       mousePosition: {
         x: chartLeft + columnIndex * xStep,
         y: posChartY,
@@ -66,7 +67,5 @@ export default function getNotificationRenderData(currentColumnValues, chartPara
       markLine,
     };
   }
-  return {
-    isShow: false,
-  };
+  return;
 }

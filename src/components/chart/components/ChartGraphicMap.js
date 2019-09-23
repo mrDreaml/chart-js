@@ -1,16 +1,15 @@
 import React, { PureComponent } from 'react';
 import Chart from './Chart';
-import OptionalAxis from './OptionalAxis';
-import Notification from './Notification';
+
 
 import constants from '../../constants/constants';
 import getAdditionalChartParams from '../logic/getAdditionalChartParams';
-import cutColumnValue from '../logic/cutColumnValues';
 
 import '../styles/style.scss';
+import Focus from './Focus';
 
 
-class ChartJS extends PureComponent {
+class ChartGraphicMap extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +17,6 @@ class ChartJS extends PureComponent {
     };
     this.svgRef = React.createRef();
   }
-
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
@@ -32,9 +30,7 @@ class ChartJS extends PureComponent {
   }
 
   calculateParams = () => {
-    const {
-      inputData, range: propRange,
-    } = this.props;
+    const { inputData } = this.props;
     if (this.state.isSvgStretched && inputData !== undefined) {
       const chartContainer = this.svgRef.current;
       const containerWidth = chartContainer.clientWidth || chartContainer.getBoundingClientRect().width;
@@ -49,24 +45,21 @@ class ChartJS extends PureComponent {
         }
         return acc;
       }, {});
-      const currentColumnValues = cutColumnValue(columns, propRange);
       const chartParams = {
         containerHeight,
         containerWidth,
-        chartHeight: containerHeight - chartMargin * chartMarginMulti - xAxisHeight,
+        chartHeight: containerHeight,
         chartWidth: containerWidth - chartMargin * chartMarginMulti,
         chartLeft: chartMargin / chartMarginMulti,
         chartTop: chartMargin / chartMarginMulti,
         xAxisHeight,
         chartRows,
         chartColumns,
-        range: propRange,
         containerOffsetLeft: this.svgRef.current.getBoundingClientRect().left,
       };
-
       return {
-        currentColumnValues,
-        chartParams: { ...chartParams, ...getAdditionalChartParams(chartParams, currentColumnValues) },
+        currentColumnValues: columns,
+        chartParams: { ...chartParams, ...getAdditionalChartParams(chartParams, columns) },
         chartColumnsShow,
       };
     }
@@ -81,19 +74,15 @@ class ChartJS extends PureComponent {
   };
 
   render() {
-    const { inputData, enable, theme } = this.props;
     const {
       isSvgStretched, width,
     } = this.state;
+    const { inputData, updateRange, theme } = this.props;
     const { chartColumnsShow, chartParams, currentColumnValues } = this.calculateParams();
-    const { colors } = inputData;
-    const notificationProps = {
-      currentColumnValues, chartParams, svgContainer: this.svgRef.current, colors,
-    };
     return (
       <>
         <svg
-          className={`${constants.graphicClassName}--${theme}`}
+          className={`${constants.graphicMapClassName}--${theme}`}
           ref={this.svgRef}
         >
           {isSvgStretched ? (
@@ -103,12 +92,8 @@ class ChartJS extends PureComponent {
                 width={constants.fullSizeStyle}
                 height={constants.fullSizeStyle}
               />
-              <OptionalAxis {...{
-                enable, chartParams, inputData, width,
-              }}
-              />
-              <Chart {...{chartColumnsShow, currentColumnValues, colors, chartParams }} width={width} />
-              <Notification {...notificationProps} enable={enable} />
+              <Chart {...{chartColumnsShow, currentColumnValues, colors: inputData.colors, chartParams, width }} />
+              <Focus chartParams={chartParams} inputData={inputData} updateRange={updateRange} range={[0, 90]} container={this.svgRef.current} width={width} />
             </>
           ) : null}
         </svg>
@@ -117,4 +102,4 @@ class ChartJS extends PureComponent {
   }
 }
 
-export default ChartJS;
+export default ChartGraphicMap;

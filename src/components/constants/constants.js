@@ -8,6 +8,10 @@ const constants = {
   chartRows: 5,
   chartColumns: 6,
   range: [0, 90],
+  rangeValues: {
+    START: 0,
+    END: 1,
+  },
   colNameX: 'x',
   themes: {
     dark: 'dark-theme',

@@ -1,12 +1,6 @@
 import React from 'react';
 
-const cacheAxisXValues = {};
-
 export default ({ chartParams, chartColumnValues }) => {
-  if (cacheAxisXValues.hasOwnProperty([chartParams.range, chartColumnValues[0]])) {
-    return cacheAxisXValues[[chartParams.range, chartColumnValues[0]]];
-  }
-
   const {
     chartColumns, xStep, chartHeight, range,
   } = chartParams;
@@ -30,7 +24,6 @@ export default ({ chartParams, chartColumnValues }) => {
       return [dateValueS[1], dateValueS[2]].join(' ');
     })();
     arr.push(<text className="axis-x-values axis-values" key={`${dateValue + i}`} x={xPos} y={yPos}>{dateValue}</text>);
-    cacheAxisXValues[[range, chartColumnValues[0]]] = arr;
   }
   return arr;
 };

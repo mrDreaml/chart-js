@@ -1,13 +1,12 @@
 import React from 'react';
+import constants from '../../constants/constants';
 
-export default ({
+const Line = ({
   chartParams, chartColumnValues, styles,
 }) => {
   const {
     xStep, yStep, chartHeight,
   } = chartParams;
-
-
   let { chartLeft, chartTop } = chartParams;
 
   if (chartLeft === undefined) {
@@ -27,3 +26,31 @@ export default ({
   });
   return renderData;
 };
+
+
+export default ({ chartColumnsShow, currentColumnValues, colors, chartParams }) => (
+  Object.values(chartColumnsShow).includes(true)
+    ? (
+      <>
+        {Object.entries(currentColumnValues).map((col, i) => {
+          const [colName, colValue] = col;
+          if (colValue !== null && colName !== constants.colNameX) {
+            const chartStyle = {
+              stroke: colors[colName],
+            };
+            const key = colName + colValue[i];
+            return (
+              <Line
+                key={key}
+                chartParams={chartParams}
+                chartColumnValues={colValue}
+                styles={chartStyle}
+              />
+            );
+          }
+          return null;
+        })}
+      </>
+    )
+    : null
+);

@@ -1,12 +1,6 @@
 import React from 'react';
 
-const cacheAxisYValues = {};
-
 export default ({ chartParams, globalYmaxValue }) => {
-  if (cacheAxisYValues.hasOwnProperty([chartParams.yMaxValue, globalYmaxValue])) {
-    return cacheAxisYValues[[chartParams.yMaxValue, globalYmaxValue]];
-  }
-
   const {
     chartRows, yStep, chartWidth, chartHeight, yMaxValue,
   } = chartParams;
@@ -33,7 +27,6 @@ export default ({ chartParams, globalYmaxValue }) => {
         <line className="axis-y-line" key={`${key}line`} x1={xStartPos} y1={yPos} x2={xEndPos} y2={yPos} />
       </React.Fragment>,
     );
-    cacheAxisYValues[[yMaxValue, globalYmaxValue]] = arr;
   }
   return arr;
 };

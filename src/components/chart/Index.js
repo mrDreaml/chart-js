@@ -229,14 +229,33 @@
 
 // enableNotification
 
-import React from 'react';
+import React, { PureComponent } from 'react';
 import ChartJS from './components/ChartGraphic';
+import ChartJSMap from './components/ChartGraphicMap';
 
-const ChartJSContainer = props => (
-  <>
-    <ChartJS {...props} enable={{ notification: true, axisX: true, axisY: true }} />
-    <ChartJS {...props} mapClassStyle />
-  </>
-);
+class ChartJSContainer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      range: [0, 90],
+    };
+  }
+
+  updateRange = (newRange) => {
+    this.setState({
+      range: newRange,
+    });
+  };
+
+  render() {
+    const { range } = this.state;
+    return (
+      <>
+        <ChartJS {...this.props} range={range} enable={{ notification: true, axisX: true, axisY: true }} />
+        <ChartJSMap {...this.props} updateRange={this.updateRange} />
+        </>
+    );
+  }
+}
 
 export default ChartJSContainer;

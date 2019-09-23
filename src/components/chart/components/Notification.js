@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import getNotificationRenderData from '../logic/getNotificationRenderData';
 
 const InfoBlock = ({ noteText, mousePosition, chartWidth }) => {
   // Default Property
@@ -56,17 +57,62 @@ const MarkLine = (props) => {
   return <line className="notification-markline" x1={x} y1={y} x2={x} y2={y + chartHeight} />;
 };
 
-function Notification(props) {
-  const {
-    noteText, mousePosition, dotMarks, markLine, chartWidth,
-  } = props;
-  return (
-    <React.Fragment>
-      <MarkLine {...markLine} />
-      <Marker dotMarks={dotMarks} />
-      <InfoBlock noteText={noteText} mousePosition={mousePosition} chartWidth={chartWidth} />
-    </React.Fragment>
-  );
+class Notification extends PureComponent{
+  constructor(props) {
+    super(props);
+    this.state = {
+      notification: {
+        isShow: false,
+      },
+    };
+  }
+
+  componentDidMount() {
+    const { svgContainer, enable } = this.props;
+    svgContainer.onmousemove = e => (enable && enable.notification ? this.showNotification(e) : null);
+    svgContainer.onmouseleave = () => (enable && enable.notification ? this.removeNotification() : null);
+  }
+
+  showNotification = (e) => {
+    this.setState({
+      notification: {
+        mousePos: {
+          clientX: e.clientX,
+          clientY: e.clientY,
+        },
+        isShow: true,
+      },
+    });
+  };
+
+
+  removeNotification = () => {
+    this.setState({
+      notification: {
+        isShow: false,
+      },
+    });
+  };
+
+  render() {
+    const { currentColumnValues, chartParams, svgContainer, colors } = this.props;
+    const { notification } = this.state;
+    const { mousePos } = notification;
+    const notificationData = getNotificationRenderData(currentColumnValues, chartParams, svgContainer, colors, mousePos);
+    if (notification.isShow && notificationData) {
+      const {
+        noteText, mousePosition, dotMarks, markLine, chartWidth,
+      } = notificationData;
+      return (
+          <>
+            <MarkLine {...markLine} />
+            <Marker dotMarks={dotMarks} />
+            <InfoBlock noteText={noteText} mousePosition={mousePosition} chartWidth={chartWidth} />
+          </>
+      );
+    }
+    return null;
+  }
 }
 
 export default Notification;

@@ -4,7 +4,8 @@ $light-theme--bgFill2: #eee;
 $light-theme--bordersColor: #eee;
 $light-theme--AxisTextColor: #ccc;
 $light-theme--focus: rgba(220, 220, 230, 0.5);
-$light-theme--focus-moce-element: rgba(120, 120, 130, 0.3);
+$light-theme--focus-moce-element: rgba(120, 120, 170, 0.2);
+$light-theme--focus-moce-elementDrag: rgba(120, 120, 170, 0.4);
 $light-theme-buttonTextColor: #222;
 $light-theme-buttonTextColor2: #777;
 
@@ -14,6 +15,7 @@ $dark-theme--bordersColor: #555;
 $dark-theme--AxisTextColor: #999;
 $dark-theme--focus: rgba(50, 50, 50, 0.7);
 $dark-theme--focus-moce-element: rgba(80, 80, 80, 0.5);
+$dark-theme--focus-moce-elementDrag: rgba(80, 80, 80, 0.7);
 $dark-theme-buttonTextColor: #999;
 $dark-theme-buttonTextColor2: #777;
 
@@ -27,6 +29,18 @@ $dark-theme-buttonTextColor2: #777;
   height: 100px;
   width: 100%;
   position: relative;
+}
+
+svg[class*="light-theme"] {
+  .not-selected-bg-map {
+    fill: $light-theme--focus-moce-element;
+  }
+}
+
+svg[class*="dark-theme"] {
+  .not-selected-bg-map {
+    fill: $dark-theme--focus-moce-element;
+  }
 }
 
 svg[class*="light-theme"],
@@ -164,7 +178,7 @@ svg.ChartJS--light-theme {
     fill: $light-theme--focus;
   }
   .focus-move-element {
-    fill: $light-theme--focus-moce-element;
+    fill: $light-theme--focus-moce-elementDrag;
   }
 }
 
@@ -239,7 +253,7 @@ svg.ChartJS--dark-theme {
     fill: $dark-theme--focus;
   }
   .focus-move-element {
-    fill: $dark-theme--focus-moce-element;
+    fill: $dark-theme--focus-moce-elementDrag;
   }
 }
 
