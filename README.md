@@ -4,6 +4,7 @@
 
 The goal is to develop software for showing simple charts based on input data.
 An Example app show 5 charts on one screen, based on the input data.
+deploy: https://dreamy-davinci-895748.netlify.com/
 
 ## Features
 * To display the graphs used svg.
