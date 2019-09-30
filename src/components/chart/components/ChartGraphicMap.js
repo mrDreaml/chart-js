@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import Chart from './Chart';
 
-
 import constants from '../../constants/constants';
 import getAdditionalChartParams from '../logic/getAdditionalChartParams';
 
@@ -19,14 +18,9 @@ class ChartGraphicMap extends PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.updateDimensions);
     setTimeout(() => this.setState({
       isSvgStretched: true,
     }), 0);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
   }
 
   calculateParams = () => {
@@ -66,18 +60,9 @@ class ChartGraphicMap extends PureComponent {
     return {};
   };
 
-
-  updateDimensions = () => {
-    this.setState({
-      width: window.innerWidth,
-    });
-  };
-
   render() {
-    const {
-      isSvgStretched, width,
-    } = this.state;
-    const { inputData, updateRange, theme } = this.props;
+    const { isSvgStretched } = this.state;
+    const { inputData, updateRange, theme, width } = this.props;
     const { chartColumnsShow, chartParams, currentColumnValues } = this.calculateParams();
     return (
       <>

@@ -21,19 +21,14 @@ class ChartJS extends PureComponent {
 
 
   componentDidMount() {
-    window.addEventListener('resize', this.updateDimensions);
     setTimeout(() => this.setState({
       isSvgStretched: true,
     }), 0);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
-  }
-
   calculateParams = () => {
     const {
-      inputData, range: propRange,
+      inputData, range: propRange, selectedGraphics,
     } = this.props;
     if (this.state.isSvgStretched && inputData !== undefined) {
       const chartContainer = this.svgRef.current;
@@ -45,11 +40,11 @@ class ChartJS extends PureComponent {
       const { columns } = inputData;
       const chartColumnsShow = Object.keys(columns).reduce((acc, v) => {
         if (v !== colNameX) {
-          acc[v] = true;
+          acc[v] = selectedGraphics[v];
         }
         return acc;
       }, {});
-      const currentColumnValues = cutColumnValue(columns, propRange);
+      const currentColumnValues = cutColumnValue(columns, propRange, chartColumnsShow);
       const chartParams = {
         containerHeight,
         containerWidth,
@@ -73,18 +68,9 @@ class ChartJS extends PureComponent {
     return {};
   };
 
-
-  updateDimensions = () => {
-    this.setState({
-      width: window.innerWidth,
-    });
-  };
-
   render() {
-    const { inputData, enable, theme } = this.props;
-    const {
-      isSvgStretched, width,
-    } = this.state;
+    const { inputData, enable, theme, width } = this.props;
+    const { isSvgStretched } = this.state;
     const { chartColumnsShow, chartParams, currentColumnValues } = this.calculateParams();
     const { colors } = inputData;
     const notificationProps = {

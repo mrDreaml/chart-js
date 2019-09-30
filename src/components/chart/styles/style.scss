@@ -45,7 +45,8 @@ svg[class*="dark-theme"] {
 
 svg[class*="light-theme"],
 svg[class*="dark-theme"] {
-  .chartLine {
+  .chart--path {
+    fill: none;
     stroke-width: 3;
   }
 
